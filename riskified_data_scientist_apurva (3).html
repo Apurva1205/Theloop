@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Apurva Chavan × TheLoops — Data Scientist, Agentic AI Systems</title>
+  <style>
+    :root {
+      --bg: #050814;
+      --bg-alt: #070c1f;
+      --card: rgba(9, 16, 40, 0.9);
+      --accent: #42e6a4;
+      --accent-soft: rgba(66, 230, 164, 0.2);
+      --accent-2: #ffc857;
+      --text-main: #f7fafc;
+      --text-muted: #a0aec0;
+      --border-subtle: rgba(148, 163, 184, 0.35);
+      --shadow-soft: 0 20px 45px rgba(0, 0, 0, 0.6);
+      --radius-xl: 24px;
+      --radius-lg: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+      background: radial-gradient(circle at top left, #122044 0, #050814 45%, #000000 100%);
+      color: var(--text-main);
+      min-height: 100vh;
+      padding: 32px 16px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    .shell {
+      width: 100%;
+      max-width: 1140px;
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(2, 6, 23, 0.98));
+      border-radius: 32px;
+      padding: 24px;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(26px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .shell::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background: radial-gradient(circle at 10% 0, rgba(66, 230, 164, 0.12), transparent 55%),
+                  radial-gradient(circle at 90% 100%, rgba(255, 200, 87, 0.16), transparent 55%);
+      opacity: 0.9;
+      pointer-events: none;
+    }
+
+    .shell-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: flex-start;
+      margin-bottom: 24px;
+    }
+
+    .identity {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 12px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      color: var(--text-muted);
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .pill span.dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 0 6px rgba(66, 230, 164, 0.25);
+    }
+
+    h1 {
+      font-size: 26px;
+      letter-spacing: 0.03em;
+    }
+
+    .subtitle {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .tag {
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      background: rgba(15, 23, 42, 0.9);
+      color: var(--text-muted);
+    }
+
+    .contact {
+      text-align: right;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .contact a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.95fr);
+      gap: 20px;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border-subtle);
+      padding: 18px 18px 20px;
+      box-shadow: 0 18px 32px rgba(0, 0, 0, 0.5);
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .card-title {
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #e2e8f0;
+    }
+
+    .job-pill {
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      color: var(--accent-2);
+    }
+
+    h2.section-label {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .section-body {
+      font-size: 13px;
+      color: #e5e7eb;
+      line-height: 1.6;
+    }
+
+    .section-body p + p {
+      margin-top: 8px;
+    }
+
+    .list {
+      list-style: none;
+      margin-top: 8px;
+    }
+
+    .list li {
+      position: relative;
+      padding-left: 16px;
+      margin-bottom: 6px;
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+
+    .list li::before {
+      content: "";
+      position: absolute;
+      left: 4px;
+      top: 8px;
+      width: 5px;
+      height: 5px;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    .chip {
+      font-size: 11px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      background: rgba(15, 23, 42, 0.96);
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    .chip.highlight {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+      color: var(--accent);
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .mini-card {
+      border-radius: var(--radius-lg);
+      border: 1px dashed rgba(148, 163, 184, 0.55);
+      padding: 10px 10px 11px;
+      background: radial-gradient(circle at top right, rgba(66, 230, 164, 0.12), transparent 60%),
+                  rgba(15, 23, 42, 0.96);
+    }
+
+    .mini-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-muted);
+      margin-bottom: 3px;
+    }
+
+    .mini-main {
+      font-size: 12px;
+      color: var(--text-main);
+      margin-bottom: 4px;
+    }
+
+    .mini-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .projects-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .project-item {
+      padding: 10px 11px;
+      border-radius: 16px;
+      border: 1px solid rgba(148, 163, 184, 0.55);
+      background: radial-gradient(circle at left, rgba(66, 230, 164, 0.1), transparent 55%),
+                  rgba(15, 23, 42, 0.96);
+    }
+
+    .project-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 3px;
+    }
+
+    .project-meta {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .project-desc {
+      font-size: 12px;
+      color: #e5e7eb;
+    }
+
+    .project-links {
+      margin-top: 5px;
+      font-size: 11px;
+    }
+
+    .project-links a {
+      color: var(--accent-2);
+      text-decoration: none;
+    }
+
+    footer {
+      margin-top: 18px;
+      font-size: 11px;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .cta {
+      padding: 7px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(226, 232, 240, 0.9);
+      background: linear-gradient(135deg, #42e6a4, #ffc857);
+      color: #020617;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      box-shadow: 0 12px 22px rgba(15, 23, 42, 0.9);
+      cursor: default;
+      white-space: nowrap;
+    }
+
+    @media (max-width: 900px) {
+      .shell {
+        border-radius: 24px;
+        padding: 18px;
+      }
+
+      header {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .contact {
+        text-align: left;
+      }
+
+      .layout {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      footer {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <div class="shell-inner">
+      <header>
+        <div class="identity">
+          <div class="pill"><span class="dot"></span> Ready to Interview · Data Scientist / Agentic AI</div>
+          <h1>Apurva Ravikar Chavan × TheLoops</h1>
+          <div class="subtitle">
+            Mapping my <strong>agentic AI, LLM, and experimentation</strong> work to the
+            <strong>Data Scientist – Agentic AI Systems</strong> role at TheLoops.
+          </div>
+          <div class="tag-row">
+            <span class="tag">Python · PyTorch · LangChain / LangGraph‑style</span>
+            <span class="tag">LLMs · RAG · Tool‑Use Agents</span>
+            <span class="tag">Experiment Design & Evaluation</span>
+            <span class="tag">Agent Behavior Analytics</span>
+          </div>
+        </div>
+        <div class="contact">
+          <div><strong>Apurva Ravikar Chavan</strong></div>
+          <div>M.S. Data Science · USA‑based (CT)</div>
+          <div>Email: <a href="mailto:apurvachavan1205@gmail.com">apurvachavan1205@gmail.com</a></div>
+          <div>GitHub: <a href="https://github.com/Apurva1205" target="_blank">Apurva1205</a></div>
+          <div>LinkedIn: <a href="https://www.linkedin.com/in/apurvachavan125" target="_blank">/in/apurvachavan125</a></div>
+        </div>
+      </header>
+
+      <div class="layout">
+        <!-- LEFT: Why I Match TheLoops -->
+        <section class="card">
+          <div class="card-header">
+            <div class="card-title">Why I Match the Agentic AI Data Scientist Role</div>
+            <div class="job-pill">Data Scientist – Agentic AI Systems · TheLoops</div>
+          </div>
+
+          <h2 class="section-label">Role Themes</h2>
+          <div class="section-body">
+            <p>
+              This role blends <strong>applied research</strong> with <strong>fast experimentation</strong> to shape how
+              AI agents reason, plan, use tools, and learn from real user interactions in
+              mission‑critical environments.
+            </p>
+            <p>
+              That’s exactly where I’ve been focusing: building and evaluating
+              <strong>LLM‑driven agents</strong> with <strong>planning, memory, retrieval, and tool‑use</strong>,
+              plus analytics around what they actually do in practice.
+            </p>
+          </div>
+
+          <h2 class="section-label" style="margin-top: 14px;">How I Align</h2>
+          <ul class="list">
+            <li>
+              <strong>Design & run applied research on agents:</strong>
+              Built an <strong>Agent Brain MVP</strong> for a social‑deduction game (Werewolf‑style) where
+              agents ingest observations, update beliefs, plan actions, and return decisions each tick.
+              I designed the <strong>evaluation loops</strong> and heuristics for success (win‑rate, consistency,
+              human‑likeness), mirroring your focus on structured experiments on agent behavior.
+            </li>
+            <li>
+              <strong>Planning, memory & retrieval:</strong>
+              Implemented <strong>working memory snapshots, episodic event stores, and retrieval layers</strong>
+              (vector‑style recall + structured beliefs) so agents can use past information when voting,
+              peeking, or generating utterances – directly aligned with TheLoops’ interest in
+              <strong>planning and memory systems</strong>.
+            </li>
+            <li>
+              <strong>LLMs, RAG & tool‑use:</strong>
+              Hands‑on with <strong>OpenAI models, LangChain / LangGraph‑like flows, function calling and RAG</strong>
+              for tool‑augmented agents. I’m comfortable building <strong>retrieval pipelines, prompts,
+              and evaluation harnesses</strong> to compare different designs.
+            </li>
+            <li>
+              <strong>Fast iteration & ambiguity:</strong>
+              Used to working in <strong>high‑ambiguity startup / research settings</strong> where we ship small,
+              test quickly, and adapt based on logs and user feedback. I like turning vague
+              “make the agent smarter” goals into <strong>measurable experiments</strong>.
+            </li>
+          </ul>
+
+          <div class="grid-2" style="margin-top: 14px;">
+            <div class="mini-card">
+              <div class="mini-label">Core Stack</div>
+              <div class="mini-main">Python · ML · Agents</div>
+              <div class="mini-sub">
+                Pandas, NumPy, scikit‑learn, PyTorch, LangChain‑style graphs, SQL basics, Jupyter, Git.
+              </div>
+            </div>
+            <div class="mini-card">
+              <div class="mini-label">How I Stand Out</div>
+              <div class="mini-main">Deep Agentic Focus & Ownership</div>
+              <div class="mini-sub">
+                Even without 5+ industry years, I bring <strong>end‑to‑end ownership</strong> of an agent system:
+                from research design to code to evaluation.
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- RIGHT: Skills & Projects -->
+        <section class="card">
+          <h2 class="section-label">TheLoops Requirements → My Skills</h2>
+          <div class="chips">
+            <span class="chip highlight">Agentic AI Systems</span>
+            <span class="chip">LLMs · RAG · Tool Calling</span>
+            <span class="chip">LangChain / Agent Frameworks</span>
+            <span class="chip">Experimentation & Metrics</span>
+            <span class="chip">Python · SQL · Analytics</span>
+            <span class="chip">Planning · Memory · Retrieval</span>
+          </div>
+
+          <ul class="list" style="margin-top: 10px;">
+            <li>
+              <strong>LLMs & agent frameworks:</strong>
+              Practical experience with <strong>LangChain / LangGraph‑style DAGs, tool‑calling patterns,
+              and stateful agents</strong>. I’ve wired agents into a live game backend via HTTP, with
+              adapters for legal actions, planning, and decision policies.
+            </li>
+            <li>
+              <strong>Data science & analytics skills:</strong>
+              Strong Python & SQL foundations (Pandas, NumPy, scikit‑learn, PyTorch) and comfort turning
+              <strong>interaction logs, traces, and experiments</strong> into dashboards and metrics to
+              understand agent performance.
+            </li>
+            <li>
+              <strong>Research mindset:</strong>
+              I treat each change as a hypothesis: define metrics (task success, latency, hallucination
+              rate, human‑override rate), run small‑scale experiments, and analyze deltas before
+              promoting designs.
+            </li>
+            <li>
+              <strong>Communication & storytelling:</strong>
+              Used to <strong>explaining complex agent behavior</strong> (belief updates, decision policies,
+              trade‑offs) to both highly technical teammates and non‑technical stakeholders.
+            </li>
+          </ul>
+
+          <h2 class="section-label" style="margin-top: 16px;">Highlighted Agentic & ML Projects</h2>
+          <div class="projects-list">
+            <div class="project-item">
+              <div class="project-title">Agent Brain MVP — Social‑Deduction Game (Werewolf)</div>
+              <div class="project-meta">Python · LLM Agents · Planning · Memory · Tool‑Use</div>
+              <div class="project-desc">
+                Designed and implemented a standalone <strong>Agent Brain service</strong> that receives
+                observations from a Flask‑SocketIO gameplay backend, updates beliefs per player, infers
+                legal actions, plans intents (vote / peek), and returns a single action per tick. Includes
+                <strong>working memory snapshots</strong>, episodic history, and a clear evaluation story
+                (win‑rate, suspicion quality, consistency).
+              </div>
+            </div>
+
+            <div class="project-item">
+              <div class="project-title">AI Resume Enhancer — Multi‑Step LLM Pipeline</div>
+              <div class="project-meta">LLMs · NLP · Evaluation Loops</div>
+              <div class="project-desc">
+                Built a multi‑stage pipeline where models parse resumes, extract skills, match them to
+                job descriptions, and recommend improvements. Includes <strong>automatic scoring,
+                comparison baselines, and error analysis</strong> — similar to building internal tools to
+                probe and evaluate agent behaviors and outputs.
+              </div>
+              <div class="project-links">
+                GitHub: <a href="https://github.com/Apurva1205/AI-RESUME-ENHANCER" target="_blank">AI‑RESUME‑ENHANCER</a>
+              </div>
+            </div>
+
+            <div class="project-item">
+              <div class="project-title">RAG & Retrieval Experiments</div>
+              <div class="project-meta">Retrieval‑Augmented Generation · Vector‑Style Memory</div>
+              <div class="project-desc">
+                Experimented with <strong>RAG pipelines</strong> for question‑answering and content
+                summarization: chunking strategies, embedding similarity, and prompt templates. The
+                same ideas transfer to <strong>agent memory & context selection</strong> in TheLoops’ systems.
+              </div>
+            </div>
+
+            <div class="project-item">
+              <div class="project-title">Core ML / DS Portfolio</div>
+              <div class="project-meta">Classification · Forecasting · Evaluation</div>
+              <div class="project-desc">
+                Projects like <strong>News‑Category‑Classification, Time‑Series‑Forecasting‑For‑Energy‑Consumption,
+                Sales‑Ad‑Optimization, and Text‑Classification</strong> show my grounding in traditional ML,
+                experimentation, and careful metric design.
+              </div>
+              <div class="project-links">
+                GitHub Portfolio: <a href="https://github.com/Apurva1205?tab=repositories" target="_blank">Full Repository List</a>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <footer>
+        <div>
+          I’m especially excited about helping TheLoops push the frontier of <strong>reliable, measurable
+          agentic AI</strong>—from research ideas, to evaluation frameworks, to production‑ready systems.
+        </div>
+        <div class="cta">Let&apos;s Talk Agentic AI</div>
+      </footer>
+    </div>
+  </div>
+</body>
+</html>
